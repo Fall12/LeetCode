@@ -9,7 +9,7 @@
 
 **注意：** 
 1. 注意空树的判断
-2 回溯算法
+2. 回溯算法
 3. 结果的保存需要注意 
 
 
@@ -51,33 +51,32 @@
 
 **注意**  叶子节点是指没有子节点的节点。
 
-	var res bool
 	func hasPathSum(root *TreeNode, sum int) bool {
-	    if root == nil  {
-	        return false
-	    }
-	
-	    res = false 
-	    dfs(root, 0, sum)
-	    return res 
-	}
-	func dfs(root *TreeNode, currentSum, sum int) bool {
-	    if res {
-	        return true 
-	    }
-	    if root == nil {
-	        if currentSum != sum {
-	            return false 
-	        }
-	        return true 
-	    }
-	    
-	    left := dfs(root.Left, currentSum+root.Val, sum)
-	    right := dfs(root.Right, currentSum + root.Val, sum)
-	
-	    if left && right {
-	        res = true 
-	        return true
-	    }
-	    return false  
-	}
+        if root == nil  {
+            return false
+        }
+    
+        res := false 
+        dfs(root, 0, sum, &res)
+        return res 
+    }
+    func dfs(root *TreeNode, currentSum, sum int, res *bool) bool {
+        if *res {
+            return true 
+        }
+        if root == nil {
+            if currentSum != sum {
+                return false 
+            }
+            return true 
+        }
+        
+        left := dfs(root.Left, currentSum+root.Val, sum, res)
+        right := dfs(root.Right, currentSum + root.Val, sum, res)
+    
+        if left && right {
+            *res = true 
+            return true
+        }
+        return false  
+    }
