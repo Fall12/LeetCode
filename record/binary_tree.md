@@ -12,7 +12,7 @@
 2. 回溯算法
 3. 结果的保存需要注意 
 
-
+```
 	func pathSum(root *TreeNode, sum int) [][]int {
 	    var res [][]int 
 	    if root == nil {
@@ -46,11 +46,12 @@
 	    dfs(root.Left, stack, cnt+1, currentSum+root.Val, sum, res)
 	    dfs(root.Right, stack, cnt+1, currentSum+root.Val, sum, res)
 	}
-	
+```
+
 ### [112. 路径总和](https://leetcode-cn.com/problems/path-sum/)
 
 **注意**  叶子节点是指没有子节点的节点。
-
+```
 	func hasPathSum(root *TreeNode, sum int) bool {
         if root == nil  {
             return false
@@ -80,3 +81,4 @@
         }
         return false  
     }
+```
