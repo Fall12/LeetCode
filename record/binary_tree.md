@@ -13,72 +13,72 @@
 3. 结果的保存需要注意 
 
 ```
-	func pathSum(root *TreeNode, sum int) [][]int {
-	    var res [][]int 
-	    if root == nil {
-	        return res
-	    }
-	    stack := make([]int, 1000) 
-	    cnt := 0
-	    currentSum := 0
-	    dfs(root, stack, cnt, currentSum, sum, &res)
-	    return res 
-	}
+func pathSum(root *TreeNode, sum int) [][]int {
+    var res [][]int 
+    if root == nil {
+        return res
+    }
+    stack := make([]int, 1000) 
+    cnt := 0
+    currentSum := 0
+    dfs(root, stack, cnt, currentSum, sum, &res)
+    return res 
+}
 	
-	func dfs(root *TreeNode, stack []int, cnt int, currentSum, sum int, res *[][]int) {
-	    if root == nil {
-	        return 
-	    }
+func dfs(root *TreeNode, stack []int, cnt int, currentSum, sum int, res *[][]int) {
+    if root == nil {
+        return 
+    }
 	
-	    if root.Val + currentSum == sum {
-	        if root.Left == nil && root.Right == nil {
-	            ans := make([]int, cnt+1 )
-	            for i :=0; i< cnt; i++ {
-	                ans[i] = stack[i]
-	            }
-	            ans[cnt] = root.Val
-	            *res = append(*res, ans)
-	            return 
-	        }
-	    }
+    if root.Val + currentSum == sum {
+        if root.Left == nil && root.Right == nil {
+            ans := make([]int, cnt+1 )
+            for i :=0; i< cnt; i++ {
+                ans[i] = stack[i]
+            }
+            ans[cnt] = root.Val
+            *res = append(*res, ans)
+            return 
+        }
+    }
 	
-	    stack[cnt] = root.Val
-	    dfs(root.Left, stack, cnt+1, currentSum+root.Val, sum, res)
-	    dfs(root.Right, stack, cnt+1, currentSum+root.Val, sum, res)
-	}
+    stack[cnt] = root.Val
+    dfs(root.Left, stack, cnt+1, currentSum+root.Val, sum, res)
+    dfs(root.Right, stack, cnt+1, currentSum+root.Val, sum, res)
+}
 ```
-
 ### [112. 路径总和](https://leetcode-cn.com/problems/path-sum/)
 
 **注意**  叶子节点是指没有子节点的节点。
+
 ```
-	func hasPathSum(root *TreeNode, sum int) bool {
-        if root == nil  {
-            return false
-        }
-    
-        res := false 
-        dfs(root, 0, sum, &res)
-        return res 
+func hasPathSum(root *TreeNode, sum int) bool {
+    if root == nil  {
+        return false
     }
-    func dfs(root *TreeNode, currentSum, sum int, res *bool) bool {
-        if *res {
-            return true 
-        }
-        if root == nil {
-            if currentSum != sum {
-                return false 
-            }
-            return true 
-        }
-        
-        left := dfs(root.Left, currentSum+root.Val, sum, res)
-        right := dfs(root.Right, currentSum + root.Val, sum, res)
     
-        if left && right {
-            *res = true 
-            return true
-        }
-        return false  
+    res := false 
+    dfs(root, 0, sum, &res)
+    return res 
+}
+func dfs(root *TreeNode, currentSum, sum int, res *bool) bool {
+    if *res {
+        return true 
     }
+    if root == nil {
+        if currentSum != sum {
+            return false 
+        }
+        return true 
+    }
+    
+    left := dfs(root.Left, currentSum+root.Val, sum, res)
+    right := dfs(root.Right, currentSum + root.Val, sum, res)
+    
+    if left && right {
+        *res = true 
+        return true
+    }
+    return false  
+}
 ```
