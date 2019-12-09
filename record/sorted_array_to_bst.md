@@ -7,7 +7,7 @@
 数组有序，二分法
 
 ### 代码
-```
+```cgo
 class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
