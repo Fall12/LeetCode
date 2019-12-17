@@ -55,3 +55,21 @@
 (例如，数组[0,1,2,4,5,6,7]可能变为[4,5,6,7,0,1,2])。
 请找出其中最小的元素。
 注意数组中可能存在重复的元素。
+
+### 思路
+遇到相等的值的时候，`right--` 是关键
+
+### 代码
+```cgo
+    int findMin(vector<int>& nums) {
+        int left=0, right = nums.size()-1;
+        while(left<= right) {
+            int mid = left + (right-left)/2;
+            if(nums[mid] > nums[right]) left = mid+1;
+            else if(nums[mid]< nums[right]) right = mid;
+            else right --;
+        }
+        return nums[left];
+    }
+
+``` 
