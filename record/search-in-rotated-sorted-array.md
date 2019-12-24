@@ -48,7 +48,7 @@
     }
 ```
 
-# [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
+# [154. 寻找旋转排序数组中的最小值 II](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 
 ### 题意
 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
@@ -73,3 +73,55 @@
     }
 
 ``` 
+
+# [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
+
+### 题意
+假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+(例如，数组[0,0,1,2,2,5,6] 可能变为[2,5,6,0,0,1,2])。
+编写一个函数来判断给定的目标值是否存在于数组中。若存在返回true，否则返回false。
+
+示例1:
+输入:nums=[2,5,6,0,0,1,2],target = 0
+输出:true
+
+### 思路
+1. 关键是遇到相等的时候，怎么跳过  
+2. 怎么确定在哪边找
+
+### 代码
+```cgo
+
+    bool search(vector<int>& nums, int target) {
+        if(nums.size() == 0 ) return false;
+        int left= 0, right=nums.size()-1;
+        return binarySearch(nums, target, left, right);
+    }
+
+    bool binarySearch(vector<int>& nums, int target, int left, int right) {
+        while(left<= right){
+            int mid= left+ (right-left)/2;
+            if(nums.at(mid) == target) return true;
+            if(nums[left] == nums[mid]) {
+                left ++;
+                continue;
+            }
+
+            //左边有序
+            if(nums[left] < nums[mid]) {
+                if(nums[left]<=target && nums[mid]> target) {
+                    right = mid -1;
+                } else {
+                    left = mid+1;
+                }
+            } else {
+                if(nums[right]>=target && nums[mid]< target)  {
+                    left = mid+1;
+                }else {
+                    right = mid-1;
+                }
+            }
+        }
+        return false;
+    }
+```
