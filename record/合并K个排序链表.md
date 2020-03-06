@@ -2,12 +2,12 @@
 ### 题意
 合并k个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
 ### 思路
-用最小堆
+用最小堆，复杂度NlogK（N是所有节点）。
 ### 代码
 ```cgo
 class Heap{
 public:
-       static const int start =1;
+    static const int start =1;
     vector<ListNode*> h;
     int index;
     Heap(int n) {
